@@ -1,9 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import { IUser } from "../models/IUser";
 import axios from 'axios';
+import { apiUrl } from "../constants";
 
 class UserStore {
-    private url = 'https://gorest.co.in/public/v2';
     public users: IUser[] = [];
     public page: number = 1;
     public total: number = 1;
@@ -13,7 +13,7 @@ class UserStore {
     }
 
     public updateUsersFromServer(): void {
-        axios.get<IUser[]>(`${this.url}/users?page=${this.page}`)
+        axios.get<IUser[]>(`${apiUrl}/users?page=${this.page}`)
             .then(response => {
                 this.total = +response.headers['x-pagination-pages'];
                 this.users = response.data;

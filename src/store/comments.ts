@@ -1,9 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import { IComment } from "../models/IComment";
 import axios from 'axios';
+import { apiUrl } from "../constants";
 
 class CommentStore {
-    private url = 'https://gorest.co.in/public/v2';
     public comments: IComment[] = [];
 
     constructor() {
@@ -11,7 +11,7 @@ class CommentStore {
     }
 
     public updateCommentsFromServer(postId: string): void {
-        axios.get<IComment[]>(`${this.url}/posts/${postId}/comments`)
+        axios.get<IComment[]>(`${apiUrl}/posts/${postId}/comments`)
             .then(response => {
                 this.comments = response.data;
             })

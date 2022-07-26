@@ -1,9 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import { IPost } from "../models/IPost";
 import axios from 'axios';
+import { apiUrl } from "../constants";
 
 class PostStore {
-    private url = 'https://gorest.co.in/public/v2';
     public posts: IPost[] = [];
     public currentPost: IPost | null = null;
     public page: number = 1;
@@ -14,7 +14,7 @@ class PostStore {
     }
 
     public updatePostsFromServer(userId: string): void {
-        axios.get<IPost[]>(`${this.url}/users/${userId}/posts?page=${this.page}`)
+        axios.get<IPost[]>(`${apiUrl}/users/${userId}/posts?page=${this.page}`)
             .then(response => {
                 this.total = +response.headers['x-pagination-pages'];
                 this.posts = response.data;
@@ -23,7 +23,7 @@ class PostStore {
     }
 
     public getPostById(postId: string): void {
-        axios.get<IPost>(`${this.url}/posts/${postId}`)
+        axios.get<IPost>(`${apiUrl}/posts/${postId}`)
             .then(response => {
                 this.currentPost = response.data;
             })

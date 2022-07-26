@@ -3,6 +3,7 @@ import { List, Pagination } from 'antd';
 import type { PaginationProps } from 'antd';
 import { observer } from 'mobx-react-lite';
 import { useStores } from "../use-stores";
+import { useNavigate } from 'react-router-dom';
 
 const Users: React.FC = observer(() => {
   const [page, setPage] = useState(1);
@@ -13,12 +14,14 @@ const Users: React.FC = observer(() => {
     setPage(pageNumber);
   };
 
+  const navigate = useNavigate();
+
   return (
     <>
       <List
         dataSource={userStore.users}
         renderItem={item => (
-          <List.Item>
+          <List.Item onClick={() => { navigate(`/users/${item.id}/posts`) }}>
             <List.Item.Meta
               title={item.name}
               description={item.email}

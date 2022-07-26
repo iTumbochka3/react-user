@@ -1,21 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { List } from 'antd';
-import axios from 'axios';
-import { IUser } from '../models/IUser';
+import { observer } from 'mobx-react-lite';
+import { useStores } from "../use-stores";
 
-const Users: React.FC = () => {
-  const [users, setUsers] = useState<IUser[]>([]);
-  useEffect(() => {
-    axios.get<IUser[]>('https://gorest.co.in/public/v2/users')
-      .then(response => {
-        setUsers(response.data)
-      })
-      .catch(e => console.log(e));
-  }, []);
+const Users: React.FC = observer(() => {
+  const { userStore } = useStores();
+  useEffect(() => { userStore.updateUsersFromServer() }, []);
   return (
     <List
-      itemLayout="horizontal"
-      dataSource={users}
+      dataSource={userStore.users}
       renderItem={item => (
         <List.Item>
           <List.Item.Meta
@@ -26,6 +19,6 @@ const Users: React.FC = () => {
       )}
     />
   );
-}
+});
 
 export default Users;

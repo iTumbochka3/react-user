@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <Sider>
         <MenuComponent />
       </Sider>
-      <Content>
+      <Content className='content'>
         <Outlet />
       </Content>
     </Layout>

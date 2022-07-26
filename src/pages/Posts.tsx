@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { List, Pagination } from 'antd';
 import type { PaginationProps } from 'antd';
 import { observer } from 'mobx-react-lite';
@@ -7,14 +7,13 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 const Posts: React.FC = observer(() => {
-  const [page, setPage] = useState(1);
   const { userId } = useParams();
   const { postStore } = useStores();
 
-  useEffect(() => { if (userId) postStore.updatePostsFromServer(userId, page) }, [page]);
+  useEffect(() => { if (userId) postStore.updatePostsFromServer(userId) }, [postStore.page]);
 
   const onChange: PaginationProps['onChange'] = pageNumber => {
-    setPage(pageNumber);
+    postStore.setPage(pageNumber);
   };
 
   const navigate = useNavigate();
@@ -31,7 +30,7 @@ const Posts: React.FC = observer(() => {
           </List.Item>
         )}
       />
-      <Pagination current={page} total={+postStore.total} onChange={onChange} showSizeChanger={false} />
+      <Pagination current={postStore.page} total={postStore.total} onChange={onChange} showSizeChanger={false} />
     </>
   );
 });

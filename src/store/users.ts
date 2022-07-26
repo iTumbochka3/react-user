@@ -5,27 +5,24 @@ import axios from 'axios';
 class UserStore {
     private url = 'https://gorest.co.in/public/v2';
     public users: IUser[] = [];
-    public total: string = '1';
+    public page: number = 1;
+    public total: number = 1;
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    public updateUsersFromServer(page: number): void {
-        axios.get<IUser[]>(`${this.url}/users?page=${page}`)
+    public updateUsersFromServer(): void {
+        axios.get<IUser[]>(`${this.url}/users?page=${this.page}`)
             .then(response => {
-                this.total = response.headers['x-pagination-pages'];
+                this.total = +response.headers['x-pagination-pages'];
                 this.users = response.data;
             })
             .catch(e => console.log(e));
     }
 
-    public setUser(users: IUser[]): void {
-        this.users = users;
-    }
-
-    public addUser(user: IUser): void {
-        this.users.push(user)
+    public setPage(page: number): void {
+        this.page = page;
     }
 }
 

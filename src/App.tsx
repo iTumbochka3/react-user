@@ -8,7 +8,7 @@ const { Sider, Content } = Layout;
 
 const App: React.FC = () => {
   return (
-    <Layout className='main-container'>
+    <Layout className='app'>
       <Sider>
         <MenuComponent />
       </Sider>

@@ -1,17 +1,36 @@
-.main-container {
+.app {
+    --default-space: 16px;
+    --icon-size: 24px;
+
     height: 100vh;
 }
 
 .content {
-    margin: 8px;
+    overflow-y: scroll;
+    margin: var(--default-space);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu {
+    margin-top: var(--default-space);
 }
 
 .icon {
-    width: 24px;
-    height: 24px;
+    width: var(--icon-size);
+    height: var(--icon-size);
 }
 
 .pagination {
-    margin: 8px;
+    margin-top: var(--default-space);
     text-align: center;
+}
+
+.post-card {
+    margin-bottom: var(--default-space);
+}
+
+.list {
+    background: white;
 }

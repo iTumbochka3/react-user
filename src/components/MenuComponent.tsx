@@ -33,6 +33,7 @@ const MenuComponent: React.FC = () => {
   };
   return (
     <Menu
+      className='menu'
       mode="inline"
       theme="dark"
       items={items}

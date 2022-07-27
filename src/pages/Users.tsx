@@ -19,8 +19,8 @@ const Users: React.FC = observer(() => {
   return (
     <>
       <List
+        className='list'
         bordered
-        itemLayout="horizontal"
         dataSource={userStore.users}
         renderItem={item => (
           <List.Item onClick={() => { navigate(`/users/${item.id}/posts`) }}>

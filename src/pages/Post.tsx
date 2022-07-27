@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../use-stores';
 import { useParams } from "react-router-dom";
-import { Descriptions, Button } from 'antd';
+import { Card, Button } from 'antd';
 import CommentsComponent from '../components/CommentsComponent';
 
 const Post: React.FC = observer(() => {
@@ -18,12 +18,11 @@ const Post: React.FC = observer(() => {
 
   return (
     <>
-      <Descriptions title="Содержание">
-        <Descriptions.Item label="Заголовок">{postStore.currentPost?.title}</Descriptions.Item>
-        <Descriptions.Item label="Тело">{postStore.currentPost?.body}</Descriptions.Item>
-      </Descriptions>
-      <Button onClick={() => setShowComments(!showComments)}> Показать комментарии</Button>
+      <Card className='post-card' title={postStore.currentPost?.title}>
+        <p>{postStore.currentPost?.body}</p>
+      </Card>
       {showComments && postId && <CommentsComponent postId={postId} />}
+      <Button onClick={() => setShowComments(!showComments)}>Показать комментарии</Button>
     </>
   );
 });

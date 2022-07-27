@@ -21,6 +21,7 @@ const Posts: React.FC = observer(() => {
   return (
     <>
       <List
+        className='list'
         bordered
         dataSource={postStore.posts}
         renderItem={item => (

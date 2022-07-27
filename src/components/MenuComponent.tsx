@@ -2,6 +2,7 @@ import React from 'react';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { ReactComponent as UserIcon } from '../assets/icons/user.svg';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -22,7 +23,7 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Пользователи', '/users')
+  getItem('Пользователи', '/users', <UserIcon />)
 ];
 
 const MenuComponent: React.FC = () => {
@@ -32,6 +33,7 @@ const MenuComponent: React.FC = () => {
   };
   return (
     <Menu
+      mode="inline"
       theme="dark"
       items={items}
       onClick={click}

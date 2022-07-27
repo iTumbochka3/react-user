@@ -23,7 +23,7 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Пользователи', '/users', <UserIcon />)
+  getItem('Пользователи', '/users', <UserIcon className={'icon'}/>)
 ];
 
 const MenuComponent: React.FC = () => {

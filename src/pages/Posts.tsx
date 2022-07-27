@@ -21,6 +21,7 @@ const Posts: React.FC = observer(() => {
   return (
     <>
       <List
+        bordered
         dataSource={postStore.posts}
         renderItem={item => (
           <List.Item onClick={() => { navigate(`/users/${userId}/posts/${item.id}`) }}>
@@ -30,7 +31,7 @@ const Posts: React.FC = observer(() => {
           </List.Item>
         )}
       />
-      <Pagination current={postStore.page} total={postStore.total} onChange={onChange} showSizeChanger={false} />
+      <Pagination className='pagination' current={postStore.page} total={postStore.total} onChange={onChange} showSizeChanger={false} />
     </>
   );
 });
